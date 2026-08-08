@@ -27,6 +27,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	if err != nil {
 		return err
 	}
+	if steps <= 0 {
+		return fmt.Errorf("количество шагов должно быть больше 0")
+	}
 	t.Steps = steps
 
 	t.TrainingType = parts[1]
@@ -34,6 +37,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	duration, err := time.ParseDuration(parts[2])
 	if err != nil {
 		return err
+	}
+	if duration <= 0 {
+		return fmt.Errorf("длительность должна быть больше 0")
 	}
 	t.Duration = duration
 
