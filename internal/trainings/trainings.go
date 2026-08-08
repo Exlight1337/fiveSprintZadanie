@@ -10,6 +10,7 @@ import (
 	"github.com/Yandex-Practicum/tracker/internal/spentenergy"
 )
 
+// Training содержит данные тренировки
 type Training struct {
 	Steps        int
 	TrainingType string
@@ -17,6 +18,7 @@ type Training struct {
 	personaldata.Personal
 }
 
+// Parse парсит строку "3456,Ходьба,3h00m" и заполняет поля стр-ы
 func (t *Training) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 	if len(parts) != 3 {
@@ -46,6 +48,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	return nil
 }
 
+// ActionInfo формирует и возвращает строку с инф-й о тренировке
 func (t Training) ActionInfo() (string, error) {
 	distance := spentenergy.Distance(t.Steps, t.Height)
 	speed := spentenergy.MeanSpeed(t.Steps, t.Height, t.Duration)

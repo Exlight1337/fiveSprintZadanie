@@ -13,6 +13,7 @@ const (
 	walkingCaloriesCoefficient = 0.5  // коэффициент для расчета калорий при ходьбе.
 )
 
+// WalkingSpentCalories вычисляет калории при ходьбе
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	if steps <= 0 {
 		return 0, fmt.Errorf("количество шагов должно быть больше 0")
@@ -36,6 +37,7 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 	return calories * walkingCaloriesCoefficient, nil
 }
 
+// RunningSpentCalories вычисляет калории при беге
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	if steps <= 0 {
 		return 0, fmt.Errorf("количество шагов должно быть больше 0")
@@ -59,6 +61,7 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 	return calories, nil
 }
 
+// MeanSpeed вычисляет среднюю скорость в км/ч
 func MeanSpeed(steps int, height float64, duration time.Duration) float64 {
 	if duration <= 0 {
 		return 0
@@ -70,6 +73,7 @@ func MeanSpeed(steps int, height float64, duration time.Duration) float64 {
 	return dist / hours
 }
 
+// Distance вычисляет дистанцию в километрах
 func Distance(steps int, height float64) float64 {
 	stepLength := height * stepLengthCoefficient
 

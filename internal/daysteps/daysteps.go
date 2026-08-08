@@ -10,12 +10,14 @@ import (
 	"github.com/Yandex-Practicum/tracker/internal/spentenergy"
 )
 
+// DaySteps содержит данные о дневных прогулках
 type DaySteps struct {
 	Steps    int
 	Duration time.Duration
 	personaldata.Personal
 }
 
+// Parse парсит строку "678,0h50m" и заполняет поля стр-ы
 func (ds *DaySteps) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 	if len(parts) != 2 {
@@ -43,6 +45,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	return nil
 }
 
+// ActionInfo формирует и возвращает строку с информацией о прогулке
 func (ds DaySteps) ActionInfo() (string, error) {
 	distance := spentenergy.Distance(ds.Steps, ds.Height)
 
